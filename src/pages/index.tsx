@@ -1,4 +1,9 @@
 import React from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import Navbar from "@/Components/Navbar";
+
+import CourseExplorer from "@/Components/CourseExplorer";
 import {
   Code,
   Database,
@@ -9,8 +14,20 @@ import {
   Server,
   Laptop,
 } from "lucide-react";
-import Link from "next/link";
+
 const index = () => {
+  const router = useRouter();
+
+ const searchQuery =
+  typeof router.query.search === "string"
+    ? router.query.search
+    : "";
+
+const tagQuery =
+  typeof router.query.tag === "string"
+    ? router.query.tag
+    : "";
+
   const certificates = [
     {
       title: "IBM Back-End Development",
@@ -115,6 +132,13 @@ const index = () => {
     { number: "275+", label: "Partners" },
     { number: "175+", label: "Countries" },
   ];
+    if (router.isReady && (searchQuery || tagQuery)) {
+    return (
+      <div>
+        <CourseExplorer />
+      </div>
+    );
+  }
   return (
     <div>
       <div className="bg-[#F3F4F5] py-2">
@@ -286,11 +310,13 @@ const index = () => {
           </div>
         </div>
       </div>
+      
 
       <div className="bg-gray-50 py-12">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl font-bold mb-8 text-center">
             Explore Top Categories
+                  
           </h2>
           <div className="grid grid-cols-3 gap-6">
             {categories.map((category, index) => (

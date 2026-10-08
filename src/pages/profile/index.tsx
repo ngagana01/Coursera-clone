@@ -5,10 +5,35 @@ import {
   Pencil,
   Plus,
   Share2,
+  Flame,
+  Trophy,
+  CalendarDays,
+  CheckCircle2,
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getStreakData, getStreakEventName, StreakData } from "@/lib/streak";
 
 const index = () => {
+  const [streak, setStreak] = useState<StreakData>({
+    currentStreak: 0,
+    longestStreak: 0,
+    totalLearningDays: 0,
+    lastActivityDate: null,
+    activityDates: [],
+    badges: [],
+  });
+
+  useEffect(() => {
+    const updateStreak = () => setStreak(getStreakData());
+
+    updateStreak();
+    window.addEventListener(getStreakEventName(), updateStreak);
+
+    return () => {
+      window.removeEventListener(getStreakEventName(), updateStreak);
+    };
+  }, []);
+
   const [user] = useState({
     name: "John Doe",
     title: "Software Engineer",
@@ -108,6 +133,66 @@ const index = () => {
               <GraduationCap className="h-5 w-5 text-gray-400" />
               <span>{user.education}</span>
             </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div>
+              <div className="flex items-center gap-2">
+                <Flame className="h-7 w-7 text-orange-500" />
+                <h2 className="text-xl font-semibold">Learning Streak</h2>
+              </div>
+              <p className="mt-1 text-sm text-gray-500">
+                Learn every day to keep your streak going.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 text-center">
+              <div className="rounded-lg bg-orange-50 px-5 py-3">
+                <div className="text-2xl font-bold text-orange-600">{streak.currentStreak}</div>
+                <div className="text-xs text-gray-600">Current</div>
+              </div>
+              <div className="rounded-lg bg-blue-50 px-5 py-3">
+                <div className="text-2xl font-bold text-blue-600">{streak.longestStreak}</div>
+                <div className="text-xs text-gray-600">Longest</div>
+              </div>
+              <div className="rounded-lg bg-green-50 px-5 py-3">
+                <div className="text-2xl font-bold text-green-600">{streak.totalLearningDays}</div>
+                <div className="text-xs text-gray-600">Learning Days</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 border-t pt-5">
+            <div className="mb-3 flex items-center gap-2">
+              <Trophy className="h-5 w-5 text-yellow-500" />
+              <h3 className="font-semibold">Streak Badges</h3>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {streak.badges.map((badge) => (
+                <div
+                  key={badge.id}
+                  className={`rounded-lg border p-4 ${
+                    badge.earned
+                      ? "border-yellow-200 bg-yellow-50"
+                      : "border-gray-200 bg-gray-50 opacity-70"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-lg">{badge.earned ? "🏆" : "🔒"}</span>
+                    {badge.earned && <CheckCircle2 className="h-5 w-5 text-green-600" />}
+                  </div>
+                  <p className="mt-2 font-semibold text-gray-900">{badge.title}</p>
+                  <p className="mt-1 text-xs text-gray-500">{badge.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-5 flex items-center gap-2 text-sm text-gray-500">
+            <CalendarDays className="h-4 w-4" />
+            <span>Last learning day: {streak.lastActivityDate || "No activity yet"}</span>
           </div>
         </div>
 

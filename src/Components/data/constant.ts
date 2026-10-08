@@ -5,6 +5,9 @@ export interface Course {
   title: string;
   provider: string;
   type: string;
+  tags: string[];
+
+ 
   image: string;
   rating: string;
   students: string;
@@ -47,6 +50,11 @@ export const courses: Course[] = [
     id: "microsoft-front-end",
     title: "Microsoft Front-End Developer",
     provider: "Microsoft",
+    tags: [
+    "Programming",
+    "Web Development",
+    "Design"
+  ],
     type: "Professional Certificate",
     image:
       "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800&h=600",
@@ -140,6 +148,11 @@ export const courses: Course[] = [
     id: "microsoft-backend",
     title: "Microsoft Back-End Developer",
     provider: "Microsoft",
+    tags: [
+    "Programming",
+    "Backend",
+    "Database"
+  ],
     type: "Professional Certificate",
     image:
       "https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800&h=600",
@@ -225,6 +238,11 @@ export const courses: Course[] = [
     type: "Professional Certificate",
     image:
       "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800&h=600",
+    tags: [
+      "Programming",
+      "Web Development",
+      "Full-Stack"
+    ],
     rating: "4.9",
     students: "1M+ learners",
     level: "Advanced level",
@@ -307,6 +325,7 @@ export const courses: Course[] = [
     provider: "Microsoft",
     type: "Professional Certificate",
     image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800&h=600",
+    tags: ["Project Business", "Management", "Marketing"],
     rating: "4.7",
     students: "600K+ learners",
     level: "Beginner level",
