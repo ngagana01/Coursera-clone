@@ -126,7 +126,7 @@ const Navbar = () => {
 
       {/* Main navigation */}
       <div className="sticky top-0 border-b border-gray-200 bg-white shadow-sm">
-        <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
+        <div className="mx-auto w-full min-w-0 max-w-7xl px-3 sm:px-4 lg:px-6">
           <div className="flex min-h-16 flex-nowrap items-center gap-2 py-3 sm:gap-3">
             {/* Logo */}
             <Link
@@ -286,7 +286,7 @@ const Navbar = () => {
                   </button>
 
                   {isUserOpen && (
-                    <div className="absolute right-0 top-full z-[80] mt-3 w-[min(260px,90vw)] overflow-hidden rounded-lg border border-gray-100 bg-white py-2 shadow-xl">
+                    <div className="absolute right-0 top-full z-[80] mt-3 w-64 max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-lg border border-gray-100 bg-white py-2 shadow-xl">
                       <Link href="/profile" onClick={closeMenus} className="block border-b px-4 py-3 hover:bg-gray-50">
                         <div className="font-medium text-gray-900">{user.name}</div>
                         <div className="break-words text-sm text-gray-500">{user.email}</div>

@@ -866,7 +866,7 @@ function CourseDetails() {
                   {Module.title}
                 </h2>
 
-                <div className="flex gap-4 mb-6">
+                <div className="mb-6 flex flex-wrap gap-3 sm:gap-4">
 
                   <span className="text-sm text-gray-600 flex items-center">
                     <Star className="h-4 w-4 mr-1" />
@@ -882,7 +882,7 @@ function CourseDetails() {
 
                 {/* PREVIOUS / NEXT */}
 
-                <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+                <div className="mb-6 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
 
                   <button
                     onClick={() => {
@@ -1001,7 +1001,7 @@ function CourseDetails() {
                               },50);
                             
                             }}
-                          className="px-5 py-2 bg-[#0056D2] text-white font-semibold rounded-md hover:bg-blue-700 transition-colors"
+                            className="w-full rounded-md bg-[#0056D2] px-5 py-2 font-semibold text-white hover:bg-blue-700 sm:w-auto"
                         >
                           Resume Watching
                         </button>
@@ -1138,9 +1138,9 @@ function CourseDetails() {
 
         <div className="mx-auto w-full max-w-7xl min-w-0 px-3 sm:px-4 lg:px-6">
 
-          <div className="flex min-h-16 flex-wrap items-center justify-between gap-3 py-3 lg:flex-nowrap">
+        <div className="flex min-w-0 flex-col gap-3 py-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between lg:flex-nowrap">
 
-            <div className="flex min-w-0 max-w-full flex-1 items-center gap-4 overflow-x-auto whitespace-nowrap sm:gap-6 lg:gap-8">
+            <div className="flex w-full min-w-0 items-center gap-5 overflow-x-auto whitespace-nowrap pb-2 text-sm sm:flex-1 sm:gap-6 sm:text-base lg:pb-0">
 
               <a
                 href="#overview"
@@ -1187,7 +1187,7 @@ function CourseDetails() {
             </div>
 
             <button
-              className="px-6 py-2 bg-[#0056D2] text-white font-semibold rounded-sm"
+              className="w-full shrink-0 rounded-sm bg-[#0056D2] px-6 py-2 font-semibold text-white sm:w-auto"
               onClick={handlemoduleclick}
             >
               Enroll Now
@@ -1204,11 +1204,11 @@ function CourseDetails() {
 
         <div className="mx-auto w-full max-w-7xl min-w-0 px-3 sm:px-4 lg:px-6">
 
-          <div className="grid min-w-0 grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_400px]">
+          <div className="grid min-w-0 grid-cols-[minmax(0,1fr)_24px] items-start gap-3 sm:gap-5">
 
             <div className="w-full min-w-0 max-w-2xl">
 
-              <div className="flex items-center space-x-4 mb-4">
+              <div className="mb-4 flex flex-wrap items-center gap-3 sm:gap-4">
 
                 <div className="flex items-center">
 
@@ -1297,10 +1297,10 @@ function CourseDetails() {
 
               {/* ACTION BUTTONS */}
 
-              <div className="mb-8 flex flex-wrap items-center gap-3 sm:gap-4">
+                 <div className="mb-8 flex min-w-0 flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
 
                 <button
-                  className="px-8 py-3 bg-[#0056D2] text-white font-semibold rounded-sm hover:bg-blue-700 transition-colors"
+                  className="w-full rounded-sm bg-[#0056D2] px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700 sm:w-auto sm:px-8"
                   onClick={
                     handlemoduleclick
                   }
@@ -1385,7 +1385,7 @@ function CourseDetails() {
                         reminderSaving ||
                         courseCompleted
                       }
-                      className="min-w-[190px] border-0 bg-transparent p-0 text-sm font-semibold text-gray-800 outline-none focus:ring-0 disabled:opacity-60"
+                      className="w-full max-w-full border-0 bg-transparent p-0 text-sm font-semibold text-gray-800 outline-none focus:ring-0 disabled:opacity-60 sm:min-w-[190px]"
                       aria-label="Course reminder"
                     >
                       <option value="none">
@@ -1524,7 +1524,7 @@ function CourseDetails() {
                   </div>
 
                   <button
-                    className="w-full px-4 py-3 bg-[#0056D2] text-white font-semibold rounded-sm hover:bg-blue-700 transition-colors mb-4"
+                    className="w-full rounded-sm bg-[#0056D2] px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700 sm:w-auto sm:px-8"
                     onClick={
                       handlemoduleclick
                     }
@@ -1658,7 +1658,7 @@ function CourseDetails() {
 
         <div className="mx-auto w-full max-w-7xl min-w-0 px-3 sm:px-4 lg:px-6">
 
-          <div className="flex justify-between items-center mb-8">
+          <div className="mb-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
 
             <h2 className="text-2xl font-bold">
               Course Content
@@ -1712,7 +1712,7 @@ function CourseDetails() {
                     }
                   >
 
-                    <div className="grid min-w-0 grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_400px]">
+                    <div className="grid min-w-0 grid-cols-[minmax(0,1fr)_24px] items-start gap-3 sm:gap-5">
 
                       <div className="flex items-start flex-1">
 
@@ -2003,7 +2003,7 @@ function CourseDetails() {
 
           <button
             onClick={handlemoduleclick}
-            className="px-8 py-3 bg-white text-[#0056D2] font-semibold rounded-sm hover:bg-gray-100 transition-colors"
+            className="w-full shrink-0 rounded-sm bg-[#0056D2] px-6 py-2 font-semibold text-white sm:w-auto"
           >
             Enroll Now
           </button>
