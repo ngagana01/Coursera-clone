@@ -482,13 +482,25 @@ function CourseDetails() {
           "Course saved. Text and images are now available offline; videos are not downloaded."
         );
       }
-    } catch {
-      setOfflineMessage(
-        "Could not update offline storage. Please try again while online."
-      );
-    } finally {
-      setOfflineSaving(false);
-    }
+    // } catch {
+    //   setOfflineMessage(
+    //     "Could not update offline storage. Please try again while online."
+    //   );
+    // } finally {
+    //   setOfflineSaving(false);
+    // }
+
+    } catch (error) {
+  console.error("Offline save failed:", error);
+
+  setOfflineMessage(
+    error instanceof Error
+      ? `Offline save failed: ${error.message}`
+      : "Offline save failed. Check the browser console."
+  );
+} finally {
+  setOfflineSaving(false);
+}
   };
 
   /* =========================================================
@@ -589,7 +601,7 @@ function CourseDetails() {
     ];
 
     return (
-      <div className="min-h-screen bg-white flex flex-col relative">
+      <div className="relative flex min-h-screen w-full min-w-0 flex-col overflow-x-clip bg-white">
 
         {/* CONFETTI */}
 
@@ -705,7 +717,7 @@ function CourseDetails() {
 
         {/* MODULE HEADER */}
 
-        <header className="bg-white border-b border-gray-200 py-4 px-6 flex items-center">
+        <header className="flex flex-wrap items-center gap-3 border-b border-gray-200 bg-white px-3 py-4 sm:px-6">
 
           <button
             onClick={handlebackclick}
@@ -718,7 +730,7 @@ function CourseDetails() {
             </span>
           </button>
 
-          <h1 className="text-xl font-semibold text-gray-800 ml-2">
+          <h1 className="min-w-0 flex-1 break-words text-base font-semibold text-gray-800 sm:ml-2 sm:text-xl">
             {course.title}
           </h1>
 
@@ -759,11 +771,11 @@ function CourseDetails() {
             </div>
           )}
 
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex min-w-0 flex-1 flex-col overflow-hidden md:flex-row">
 
           {/* MODULE SIDEBAR */}
 
-          <div className="w-80 border-r border-gray-200 h-full overflow-y-auto flex-shrink-0">
+          <div className="h-auto w-full shrink-0 overflow-x-auto border-b border-gray-200 md:h-full md:w-72 md:overflow-y-auto md:overflow-x-hidden md:border-b-0 md:border-r lg:w-80">
 
             <div className="p-4 border-b border-gray-200">
 
@@ -844,11 +856,11 @@ function CourseDetails() {
 
           {/* MODULE CONTENT */}
 
-          <div className="flex-1 h-full overflow-y-auto bg-gray-50">
+          <div className="h-auto min-h-0 min-w-0 flex-1 overflow-y-auto bg-gray-50 md:h-full">
 
-            <div className="max-w-full mx-auto p-6">
+            <div className="mx-auto w-full max-w-6xl min-w-0 p-3 sm:p-5 lg:p-6">
 
-              <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
+              <div className="mb-6 min-w-0 rounded-xl bg-white p-3 shadow-sm sm:p-5 lg:p-6">
 
                 <h2 className="text-2xl font-bold text-gray-800 mb-2">
                   {Module.title}
@@ -870,7 +882,7 @@ function CourseDetails() {
 
                 {/* PREVIOUS / NEXT */}
 
-                <div className="flex justify-between mb-6">
+                <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
 
                   <button
                     onClick={() => {
@@ -1016,7 +1028,7 @@ function CourseDetails() {
 
               {/* ABOUT MODULE */}
 
-              <div className="bg-white rounded-xl shadow-sm p-6">
+              <div className="min-w-0 rounded-xl bg-white p-3 shadow-sm sm:p-6">
 
                 <h3 className="text-xl font-semibold mb-4">
                   About this module
@@ -1030,7 +1042,7 @@ function CourseDetails() {
                   Module Details
                 </h4>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-6">
 
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <div className="flex items-center mb-2">
@@ -1118,17 +1130,17 @@ function CourseDetails() {
 
   
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen w-full overflow-x-clip bg-white">
 
       {/* STICKY NAVIGATION */}
 
-      <div className="sticky top-0 bg-white border-b z-50">
+      <div className="sticky top-0 z-50 w-full border-b bg-white">
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-3 sm:px-4 lg:px-6">
 
-          <div className="flex items-center justify-between h-16">
+          <div className="flex min-h-16 flex-wrap items-center justify-between gap-3 py-3 lg:flex-nowrap">
 
-            <div className="flex items-center space-x-8">
+            <div className="flex min-w-0 max-w-full flex-1 items-center gap-4 overflow-x-auto whitespace-nowrap sm:gap-6 lg:gap-8">
 
               <a
                 href="#overview"
@@ -1188,13 +1200,13 @@ function CourseDetails() {
 
       {/* COURSE HEADER */}
 
-      <div className="bg-gradient-to-r from-gray-50 to-gray-100 py-12">
+      <div className="w-full min-w-0 bg-gradient-to-r from-gray-50 to-gray-100 py-6 sm:py-10 lg:py-12">
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-3 sm:px-4 lg:px-6">
 
-          <div className="flex items-start justify-between">
+          <div className="grid min-w-0 grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_400px]">
 
-            <div className="max-w-2xl">
+            <div className="w-full min-w-0 max-w-2xl">
 
               <div className="flex items-center space-x-4 mb-4">
 
@@ -1218,11 +1230,11 @@ function CourseDetails() {
 
               </div>
 
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              <h1 className="mb-4 break-words text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">
                 {course.title}
               </h1>
 
-              <p className="text-lg text-gray-600 mb-6">
+              <p className="mb-6 break-words text-base text-gray-600 sm:text-lg">
 
                 {showFullDescription
                   ? fullDescription
@@ -1246,7 +1258,7 @@ function CourseDetails() {
 
               </p>
 
-              <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                 <div className="flex items-center">
                   <Users className="h-5 w-5 text-gray-500" />
@@ -1285,7 +1297,7 @@ function CourseDetails() {
 
               {/* ACTION BUTTONS */}
 
-              <div className="flex items-center space-x-4 mb-8">
+              <div className="mb-8 flex flex-wrap items-center gap-3 sm:gap-4">
 
                 <button
                   className="px-8 py-3 bg-[#0056D2] text-white font-semibold rounded-sm hover:bg-blue-700 transition-colors"
@@ -1394,7 +1406,7 @@ function CourseDetails() {
 
                 {/* BOOKMARK / SHARE */}
 
-                <div className="flex items-center space-x-4">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4">
 
                   <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
                     <BookmarkPlus className="h-6 w-6 text-gray-600" />
@@ -1433,7 +1445,7 @@ function CourseDetails() {
 
               {/* LANGUAGES */}
 
-              <div className="flex items-center space-x-4">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
 
                 <Globe className="h-5 w-5 text-gray-500" />
 
@@ -1465,9 +1477,9 @@ function CourseDetails() {
 
             {/* COURSE PREVIEW CARD */}
 
-            <div className="w-[400px]">
+            <div className="w-full min-w-0 lg:w-[400px]">
 
-              <div className="bg-white rounded-lg shadow-xl overflow-hidden sticky top-24">
+              <div className="w-full min-w-0 overflow-hidden rounded-lg bg-white shadow-xl lg:sticky lg:top-24">
 
                 <div className="relative">
 
@@ -1558,15 +1570,15 @@ function CourseDetails() {
 
       {/* CAREER OUTCOMES */}
 
-      <div className="py-12 bg-white">
+      <div className="w-full min-w-0 overflow-x-clip bg-white py-8 sm:py-12">
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-3 sm:px-4 lg:px-6">
 
           <h2 className="text-2xl font-bold mb-8">
             Career Outcomes
           </h2>
 
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
 
             {course.careerOutcomes.map(
               (outcome, index) => {
@@ -1577,7 +1589,7 @@ function CourseDetails() {
                 return (
                   <div
                     key={index}
-                    className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow"
+                    className="min-w-0 rounded-lg bg-gray-50 p-4 transition-shadow hover:shadow-md sm:p-6"
                   >
 
                     {IconComponent && (
@@ -1609,10 +1621,10 @@ function CourseDetails() {
 
       <div
         id="skills"
-        className="py-12 bg-gray-50"
+        className="w-full min-w-0 overflow-x-clip bg-gray-50 py-8 sm:py-12"
       >
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-3 sm:px-4 lg:px-6">
 
           <h2 className="text-2xl font-bold mb-6">
             Skills you'll gain
@@ -1641,10 +1653,10 @@ function CourseDetails() {
 
       <div
         id="content"
-        className="py-12 bg-white"
+        className="w-full min-w-0 overflow-x-clip bg-white py-8 sm:py-12"
       >
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-3 sm:px-4 lg:px-6">
 
           <div className="flex justify-between items-center mb-8">
 
@@ -1689,7 +1701,7 @@ function CourseDetails() {
                 >
 
                   <button
-                    className="w-full p-6 text-left"
+                    className="w-full min-w-0 p-3 text-left sm:p-6"
                     onClick={() =>
                       setSelectedModule(
                         selectedModule ===
@@ -1700,7 +1712,7 @@ function CourseDetails() {
                     }
                   >
 
-                    <div className="flex items-start justify-between">
+                    <div className="grid min-w-0 grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_400px]">
 
                       <div className="flex items-start flex-1">
 
@@ -1745,9 +1757,9 @@ function CourseDetails() {
 
                   {selectedModule ===
                     index && (
-                    <div className="px-6 pb-6 pt-2 border-t">
+                    <div className="px-3 pb-4 pt-2 border-t sm:px-6 sm:pb-6">
 
-                      <div className="grid grid-cols-4 gap-4">
+                      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
 
                         <div className="bg-gray-50 p-4 rounded-lg">
                           <p className="text-sm text-gray-600">
@@ -1813,23 +1825,23 @@ function CourseDetails() {
 
       <div
         id="reviews"
-        className="py-12 bg-gray-50"
+        className="w-full min-w-0 overflow-x-clip bg-gray-50 py-8 sm:py-12"
       >
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-3 sm:px-4 lg:px-6">
 
           <h2 className="text-2xl font-bold mb-8">
             Learner Success Stories
           </h2>
 
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-8">
 
             {course.testimonials.map(
               (testimonial, index) => (
 
                 <div
                   key={index}
-                  className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
+                  className="min-w-0 rounded-lg bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:p-6"
                 >
 
                   <div className="flex items-start space-x-4 mb-4">
@@ -1882,15 +1894,15 @@ function CourseDetails() {
 
       {/* FAQ */}
 
-      <div className="py-12 bg-white">
+      <div className="w-full min-w-0 overflow-x-clip bg-white py-8 sm:py-12">
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-3 sm:px-4 lg:px-6">
 
           <h2 className="text-2xl font-bold mb-8">
             Frequently Asked Questions
           </h2>
 
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-8">
 
             <div className="space-y-4">
 

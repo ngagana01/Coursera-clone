@@ -114,24 +114,56 @@ const cacheImage = async (db: IDBDatabase, url: string) => {
   }
 };
 
-export const saveCourseOffline = async (course: DownloadableCourse): Promise<void> => {
+// export const saveCourseOffline = async (course: DownloadableCourse): Promise<void> => {
+//   const db = await openDb();
+
+//   const courseRecord: OfflineCourseRecord = {
+//     id: course.id,
+//     course: stripVideoContent(course),
+//     savedAt: Date.now(),
+//   };
+
+//   const courseTransaction = db.transaction(COURSE_STORE, "readwrite");
+//   courseTransaction.objectStore(COURSE_STORE).put(courseRecord);
+//   await transactionDone(courseTransaction);
+
+//   for (const imageUrl of getCourseImages(course)) {
+//     await cacheImage(db, imageUrl);
+//   }
+
+//   db.close();
+// };
+export const saveCourseOffline = async (
+  course: DownloadableCourse
+): Promise<void> => {
   const db = await openDb();
 
-  const courseRecord: OfflineCourseRecord = {
-    id: course.id,
-    course: stripVideoContent(course),
-    savedAt: Date.now(),
-  };
+  try {
+    const courseRecord: OfflineCourseRecord = {
+      id: course.id,
+      course: stripVideoContent(course),
+      savedAt: Date.now(),
+    };
 
-  const courseTransaction = db.transaction(COURSE_STORE, "readwrite");
-  courseTransaction.objectStore(COURSE_STORE).put(courseRecord);
-  await transactionDone(courseTransaction);
+    const transaction = db.transaction(
+      COURSE_STORE,
+      "readwrite"
+    );
 
-  for (const imageUrl of getCourseImages(course)) {
-    await cacheImage(db, imageUrl);
+    const done = transactionDone(transaction);
+
+    transaction.objectStore(COURSE_STORE).put(courseRecord);
+
+    await done;
+
+    // Images are optional; saving course text must succeed
+    // even if an external image cannot be cached.
+    for (const imageUrl of getCourseImages(course)) {
+      await cacheImage(db, imageUrl);
+    }
+  } finally {
+    db.close();
   }
-
-  db.close();
 };
 
 export const isCourseOffline = async (courseId: string): Promise<boolean> => {
