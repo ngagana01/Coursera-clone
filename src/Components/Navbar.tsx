@@ -189,7 +189,7 @@ const Navbar = () => {
                 onChange={(event) => updateSearch(event.target.value)}
                 onKeyDown={handleSearchKeyDown}
                 placeholder="What do you want to learn?"
-                aria-label="Search courses"
+                // aria-label="Search courses"
                 className="w-full min-w-0 rounded-md border border-gray-300 py-2 pl-10 pr-10 outline-none transition focus:border-[#0056D2] focus:ring-2 focus:ring-blue-100"
               />
               <Search className="pointer-events-none absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
@@ -348,7 +348,7 @@ const Navbar = () => {
                 onChange={(event) => updateSearch(event.target.value)}
                 onKeyDown={handleSearchKeyDown}
                 placeholder="What do you want to learn?"
-                aria-label="Search courses"
+                // aria-label="Search courses"
                 className="w-full rounded-md border border-gray-300 py-3 pl-10 pr-10 outline-none focus:border-[#0056D2] focus:ring-2 focus:ring-blue-100"
               />
               <Search className="pointer-events-none absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
